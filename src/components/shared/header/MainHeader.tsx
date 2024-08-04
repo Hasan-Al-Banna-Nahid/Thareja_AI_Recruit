@@ -11,7 +11,7 @@ import SearchingDropDown from "./SearchingDropDown";
 import SmallDeviceSearchBar from "./SmallDeviceSearchBar";
 
 const MainHeader = () => {
-  const [activeDropDown, setActiveDropDown] = useState<null | number>(null);
+  // const [activeDropDown, setActiveDropDown] = useState<null | number>(null);
   return (
     <div className="fixed top-0  bg-white w-full z-[9999] left-0 px-5 md:px-[40px] py-[24px] md:py-[28px] xl:py-[34px]">
       <div className="max-w-[1920px] mx-auto flex items-center justify-between w-full">

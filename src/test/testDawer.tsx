@@ -5,7 +5,7 @@ import * as React from "react";
 import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";
 import { Bar, BarChart, ResponsiveContainer } from "recharts";
 
-import { Button } from "@/components/utils/button";
+import { Button } from "@/components/Data-Display/button";
 import {
   Drawer,
   DrawerClose,
@@ -15,7 +15,7 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/utils/drawer";
+} from "@/components/Data-Display/drawer";
 
 const data = [
   {
