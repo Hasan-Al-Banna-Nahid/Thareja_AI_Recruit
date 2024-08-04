@@ -19,7 +19,7 @@ export default function WithFooter({
       <MainHeader />
       {children}
 
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

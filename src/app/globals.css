@@ -4,7 +4,7 @@
 
 /* Global Common Rester */
 * {
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 body {
   margin: 0;

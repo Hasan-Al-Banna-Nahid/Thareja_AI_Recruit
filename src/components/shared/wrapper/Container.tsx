@@ -17,7 +17,7 @@ const Container = ({ className, children }: PropsType) => {
   return (
     <div
       id="custom_container"
-      className={`${className} w-full max-w-[1518px] mx-auto`}
+      className={`${className} w-full max-w-[1800px] mx-auto`}
     >
       {children}
     </div>
