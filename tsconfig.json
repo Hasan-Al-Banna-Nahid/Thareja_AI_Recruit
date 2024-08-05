@@ -28,7 +28,7 @@
     ".next/types/**/*.ts",
     "src/app/(public pages)/(with-header-footer)/gptVetting/page.jsx",
     ".next/types/app/layout.tsx",
-    "src/app/Routes/gptVetting/BodyTopRightCornerButtons.jsx"
+    "src/app/Routes/gptVetting/MainLayout/BodyTopRightCornerButtons.tsx"
   ],
   "exclude": ["node_modules"]
 }
