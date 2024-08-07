@@ -14,7 +14,7 @@ const JobsPagination = ({
   setCurrentPage,
 }: PropsType) => {
   //   ===== btn style =====
-  const btnStyle = ` flex items-center justify-center gap-[15px] py-2 md:py-[12px] lg:py-[16px] px-5 rounded-[100px] border border-[#005AFF] bg-[#005AFF] text-white`;
+  const btnStyle = ` flex items-center justify-center gap-[25px] py-2 md:py-[12px] lg:py-[16px] px-5 rounded-[100px] border border-[#005AFF] bg-[#005AFF] text-white `;
   return (
     <div className="w-full flex flex-wrap gap-5  items-center justify-between mt-[28px]">
       {/* <div className="w-full md:w-4/6 bg-red-100 flex items-center justify-between"> */}
@@ -45,7 +45,7 @@ const JobsPagination = ({
       {/* </div> */}
 
       {/* ==== page info ==== */}
-      <div className="w-full justify-center md:justify-end md:w-auto text-[#005AFF] text-base md:text-[18px] lg:text-[20px] leading-normal tracking-[0.4px] flex items-center gap-2.5">
+      <div className="w-full justify-center md:justify-end md:w-auto text-[#005AFF] text-base md:text-[18px] lg:text-[20px] leading-normal tracking-[0.4px] flex items-center gap-2.5 mr-12 mb-6">
         <span>Page</span>
         <span className=" w-10 md:w-[50px] h-7 md:h-[32px] flex items-center justify-center border border-[#005AFF] rounded-[10px] text-black">
           {currentPage}

@@ -1,3 +1,4 @@
+// store/store.js
 import { configureStore } from "@reduxjs/toolkit";
 import MainHeaderSlice from "./Features/hambergerMenuSlice.ts/mainHeaderSlice";
 import AllJobPostActiveStages from "./Features/jobpost/AllJobPostActiveStages";
@@ -11,6 +12,9 @@ import jobPostingStepsSlice from "./Features/jobpost/jobPostSteps";
 import MessageActiveStages from "./Features/message/MessageActiveStages";
 import FreelancerProfileActiveStages from "./Features/profile/FreelancerProfileActiveStages";
 import Modyfier from "./Features/rootModyfier/Modyfier";
+import tabsSlice from "@/Redux/Features/GptVettilngSlice/tabsSlice";
+import modalReducer from "./Features/GptVettilngSlice/modalSlice";
+import candidateFormReducer from "./Features/GptVettilngSlice/candidateFormSlice";
 
 export const store = configureStore({
   reducer: {
@@ -26,6 +30,9 @@ export const store = configureStore({
     freelancerProfileActiveStages: FreelancerProfileActiveStages.reducer,
     hireFreelancersActiveStages: HireFreelancersActiveStages.reducer,
     messageActiveStages: MessageActiveStages.reducer,
+    tabs: tabsSlice,
+    modalSlice: modalReducer,
+    candidateForm: candidateFormReducer,
   },
 });
 
