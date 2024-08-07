@@ -1,20 +1,21 @@
-export interface TabsState {
-  activeTab: string;
+// src/redux/features/types.ts
+
+export interface Skill {
+  name: string;
+  level: string;
 }
 
-export type TabsAction = {
-  type: "SET_ACTIVE_TAB";
-  payload: string;
-};
-
-// Define the PropsType for JobsPagination component
-export interface JobsPaginationProps {
-  currentPage: number;
-  totalPage: number;
-  setCurrentPage: (page: number) => void;
+export interface Candidate {
+  name: string;
+  email: string;
 }
 
-// Define the initial state type for the modal
+export interface CandidateFormState {
+  predefinedSkills: boolean;
+  skills: Skill[];
+  candidates: Candidate[];
+}
+
 export interface ModalState {
   isOpen: boolean;
 }
@@ -25,4 +26,11 @@ export interface ButtonProps {
   text: string;
   buttonClassName: string;
   onClick?: () => void;
+}
+
+// Define the PropsType for JobsPagination component
+export interface JobsPaginationProps {
+  currentPage: number;
+  totalPage: number;
+  setCurrentPage: (page: number) => void;
 }

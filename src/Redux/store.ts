@@ -13,7 +13,8 @@ import MessageActiveStages from "./Features/message/MessageActiveStages";
 import FreelancerProfileActiveStages from "./Features/profile/FreelancerProfileActiveStages";
 import Modyfier from "./Features/rootModyfier/Modyfier";
 import tabsSlice from "@/Redux/Features/GptVettilngSlice/tabsSlice";
-import modalSlice from "./Features/GptVettilngSlice/modalSlice";
+import modalReducer from "./Features/GptVettilngSlice/modalSlice";
+import candidateFormReducer from "./Features/GptVettilngSlice/candidateFormSlice";
 
 export const store = configureStore({
   reducer: {
@@ -30,7 +31,8 @@ export const store = configureStore({
     hireFreelancersActiveStages: HireFreelancersActiveStages.reducer,
     messageActiveStages: MessageActiveStages.reducer,
     tabs: tabsSlice,
-    modalSlice: modalSlice,
+    modalSlice: modalReducer,
+    candidateForm: candidateFormReducer,
   },
 });
 
