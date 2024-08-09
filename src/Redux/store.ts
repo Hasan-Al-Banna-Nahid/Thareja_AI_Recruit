@@ -15,6 +15,8 @@ import Modyfier from "./Features/rootModyfier/Modyfier";
 import tabsSlice from "@/Redux/Features/GptVettilngSlice/tabsSlice";
 import modalReducer from "./Features/GptVettilngSlice/modalSlice";
 import candidateFormReducer from "./Features/GptVettilngSlice/candidateFormSlice";
+import microphoneReducer from "./Features/GptVettilngSlice/microphoneSlice";
+import cameraReducer from "./Features/GptVettilngSlice/cameraSlice";
 
 export const store = configureStore({
   reducer: {
@@ -33,6 +35,8 @@ export const store = configureStore({
     tabs: tabsSlice,
     modalSlice: modalReducer,
     candidateForm: candidateFormReducer,
+    microphone: microphoneReducer,
+    camera: cameraReducer,
   },
 });
 
