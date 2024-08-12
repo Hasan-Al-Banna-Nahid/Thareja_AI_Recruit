@@ -1,14 +1,5 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState, AppDispatch } from "@/Redux/store";
-import {
-  nextStep,
-  completeMicTest,
-  completeVideoTest,
-  completeScreenShare,
-} from "@/Redux/Features/GptVettilngSlice/testSlice";
-import { useRouter } from "next/navigation";
 
 // Microphone Test Component
 const MicrophoneTest: React.FC<{ onNext: () => void }> = ({ onNext }) => {
@@ -18,7 +9,6 @@ const MicrophoneTest: React.FC<{ onNext: () => void }> = ({ onNext }) => {
   const analyserRef = useRef<AnalyserNode | null>(null);
   const microphoneRef = useRef<MediaStreamAudioSourceNode | null>(null);
   const dataArrayRef = useRef<Uint8Array | null>(null);
-  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     if (isRecording) {
@@ -34,7 +24,7 @@ const MicrophoneTest: React.FC<{ onNext: () => void }> = ({ onNext }) => {
   const startMic = async () => {
     try {
       audioContextRef.current = new (window.AudioContext ||
-        window.webkitAudioContext)();
+        window.AudioContext)();
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       microphoneRef.current =
         audioContextRef.current.createMediaStreamSource(stream);
@@ -44,6 +34,8 @@ const MicrophoneTest: React.FC<{ onNext: () => void }> = ({ onNext }) => {
       dataArrayRef.current = new Uint8Array(
         analyserRef.current.frequencyBinCount
       );
+
+      // Start analyzing the audio data
       updateMicLevel();
     } catch (err) {
       console.error("Error accessing microphone", err);
@@ -57,7 +49,7 @@ const MicrophoneTest: React.FC<{ onNext: () => void }> = ({ onNext }) => {
     if (audioContextRef.current) {
       audioContextRef.current.close();
     }
-    setMicLevel(0);
+    setMicLevel(0); // Reset mic level when stopped
   };
 
   const updateMicLevel = () => {
@@ -75,11 +67,6 @@ const MicrophoneTest: React.FC<{ onNext: () => void }> = ({ onNext }) => {
     setIsRecording((prevState) => !prevState);
   };
 
-  const handleNextStep = () => {
-    dispatch(completeMicTest()); // Mark mic test as complete
-    dispatch(nextStep()); // Move to next step
-  };
-
   return (
     <div className="mic-test-container">
       <h2>Test your microphone</h2>
@@ -89,11 +76,7 @@ const MicrophoneTest: React.FC<{ onNext: () => void }> = ({ onNext }) => {
       <button onClick={handleToggleRecording}>
         {isRecording ? "Stop Speaking" : "Start Speaking"}
       </button>
-      <button
-        className="my-4"
-        onClick={handleNextStep}
-        disabled={micLevel < 20}
-      >
+      <button className="my-4" onClick={onNext} disabled={micLevel < 20}>
         Next
       </button>
     </div>
@@ -104,7 +87,6 @@ const MicrophoneTest: React.FC<{ onNext: () => void }> = ({ onNext }) => {
 const VideoTest: React.FC<{ onNext: () => void }> = ({ onNext }) => {
   const [isCameraOn, setIsCameraOn] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const dispatch = useDispatch<AppDispatch>();
 
   const handleStartCamera = async () => {
     try {
@@ -114,7 +96,7 @@ const VideoTest: React.FC<{ onNext: () => void }> = ({ onNext }) => {
       }
       setIsCameraOn(true);
     } catch (err) {
-      console.error("Error starting camera", err);
+      console.error("Error accessing webcam", err);
     }
   };
 
@@ -126,11 +108,6 @@ const VideoTest: React.FC<{ onNext: () => void }> = ({ onNext }) => {
       videoRef.current.srcObject = null;
     }
     setIsCameraOn(false);
-  };
-
-  const handleNextStep = () => {
-    dispatch(completeVideoTest()); // Mark video test as complete
-    dispatch(nextStep()); // Move to next step
   };
 
   return (
@@ -145,7 +122,7 @@ const VideoTest: React.FC<{ onNext: () => void }> = ({ onNext }) => {
       <button onClick={isCameraOn ? handleStopCamera : handleStartCamera}>
         {isCameraOn ? "Stop Camera" : "Start Camera"}
       </button>
-      <button className="my-4" onClick={handleNextStep} disabled={!isCameraOn}>
+      <button className="my-4" onClick={onNext} disabled={!isCameraOn}>
         Next
       </button>
     </div>
@@ -154,29 +131,22 @@ const VideoTest: React.FC<{ onNext: () => void }> = ({ onNext }) => {
 
 // Screen Share Component
 const ScreenShare: React.FC<{ onNext: () => void }> = ({ onNext }) => {
-  const dispatch = useDispatch<AppDispatch>();
-
   const startScreenShare = async () => {
     try {
       const stream = await navigator.mediaDevices.getDisplayMedia({
         video: true,
       });
       console.log("Screen sharing started", stream);
-      dispatch(completeScreenShare()); // Mark screen share as complete
     } catch (err) {
       console.error("Error starting screen share", err);
     }
-  };
-
-  const handleNextStep = () => {
-    dispatch(nextStep()); // Move to next step
   };
 
   return (
     <div>
       <h2>Screen Share</h2>
       <button onClick={startScreenShare}>Start Screen Share</button>
-      <button className="my-4" onClick={handleNextStep}>
+      <button className="my-4" onClick={onNext}>
         Next
       </button>
     </div>
@@ -185,27 +155,10 @@ const ScreenShare: React.FC<{ onNext: () => void }> = ({ onNext }) => {
 
 // Main TestPage Component
 const TestPage: React.FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const currentStep = useSelector((state: RootState) => state.test.currentStep);
-  const micTestCompleted = useSelector(
-    (state: RootState) => state.test.micTestCompleted
-  );
-  const videoTestCompleted = useSelector(
-    (state: RootState) => state.test.videoTestCompleted
-  );
-  const screenShareCompleted = useSelector(
-    (state: RootState) => state.test.screenShareCompleted
-  );
-  const router = useRouter();
-
-  useEffect(() => {
-    if (micTestCompleted && videoTestCompleted && screenShareCompleted) {
-      router.push("/Routes/gptVetting/CandidateInterview/Exam"); // Navigate to the exam page if all tests are complete
-    }
-  }, [micTestCompleted, videoTestCompleted, screenShareCompleted, router]);
+  const [currentStep, setCurrentStep] = useState(1);
 
   const handleNextStep = () => {
-    dispatch(nextStep());
+    setCurrentStep((prevStep) => prevStep + 1);
   };
 
   return (

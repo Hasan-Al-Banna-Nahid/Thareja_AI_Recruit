@@ -36,7 +36,6 @@ const MicrophoneTest: React.FC<{
         analyserRef.current.frequencyBinCount
       );
 
-      // Start analyzing the audio data
       updateMicLevel();
     } catch (err) {
       console.error("Error accessing microphone", err);
@@ -51,7 +50,7 @@ const MicrophoneTest: React.FC<{
     if (audioContextRef.current) {
       audioContextRef.current.close();
     }
-    setMicLevel(0); // Reset mic level when stopped
+    setMicLevel(0);
   };
 
   const updateMicLevel = () => {
@@ -61,9 +60,8 @@ const MicrophoneTest: React.FC<{
     setMicLevel(average);
 
     if (average > 20) {
-      // Threshold for mic level
-      onMicTestComplete(true); // Complete mic test if the level exceeds the threshold
-      setIsRecording(false); // Stop recording once test is complete
+      onMicTestComplete(true);
+      setIsRecording(false);
     } else if (isRecording) {
       requestAnimationFrame(updateMicLevel);
     }
@@ -85,3 +83,5 @@ const MicrophoneTest: React.FC<{
     </div>
   );
 };
+
+export default MicrophoneTest;

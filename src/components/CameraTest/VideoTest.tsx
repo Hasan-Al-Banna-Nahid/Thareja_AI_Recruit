@@ -1,13 +1,14 @@
+// components/CameraTest/VideoTest.tsx
 "use client";
+
 import React, { useState, useRef } from "react";
 
-// Define the props interface
 interface VideoTestProps {
-  onCameraTestComplete: (isWorking: boolean) => void;
+  onCameraTestComplete: (result: boolean) => void;
 }
 
 const VideoTest: React.FC<VideoTestProps> = ({ onCameraTestComplete }) => {
-  const [isCameraOn, setIsCameraOn] = useState<boolean>(false);
+  const [isCameraOn, setIsCameraOn] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const handleStartCamera = async () => {
@@ -15,6 +16,7 @@ const VideoTest: React.FC<VideoTestProps> = ({ onCameraTestComplete }) => {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
+        videoRef.current.play();
       }
       setIsCameraOn(true);
       onCameraTestComplete(true);
@@ -26,8 +28,9 @@ const VideoTest: React.FC<VideoTestProps> = ({ onCameraTestComplete }) => {
 
   const handleStopCamera = () => {
     const stream = videoRef.current?.srcObject as MediaStream;
-    const tracks = stream?.getTracks();
-    tracks?.forEach((track) => track.stop());
+    if (stream) {
+      stream.getTracks().forEach((track) => track.stop());
+    }
     if (videoRef.current) {
       videoRef.current.srcObject = null;
     }
@@ -42,7 +45,7 @@ const VideoTest: React.FC<VideoTestProps> = ({ onCameraTestComplete }) => {
         autoPlay
         playsInline
         style={{ width: "100%", maxHeight: "400px", marginBottom: "20px" }}
-      ></video>
+      />
       <button onClick={isCameraOn ? handleStopCamera : handleStartCamera}>
         {isCameraOn ? "Stop Camera" : "Start Camera"}
       </button>
