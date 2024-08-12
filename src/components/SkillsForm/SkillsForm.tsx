@@ -3,15 +3,18 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import arrowRight from "@/app/../../public/svgs/vuesax/linear/arrow-right.svg";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
+import { setSkills } from "@/Redux/Features/GptVettilngSlice/examSlice"; // Import the action
 
-const SkillsForm = () => {
-  const [skills, setSkills] = useState<{ skill: string; expertise: string }[]>(
-    []
-  );
+const SkillsForm: React.FC = () => {
+  const [skills, setSkillsState] = useState<
+    { skill: string; expertise: string }[]
+  >([]);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleAddSkill = () => {
-    setSkills([...skills, { skill: "", expertise: "" }]);
+    setSkillsState([...skills, { skill: "", expertise: "" }]);
   };
 
   const handleChange = (
@@ -21,15 +24,15 @@ const SkillsForm = () => {
   ) => {
     const newSkills = [...skills];
     newSkills[index][field] = value;
-    setSkills(newSkills);
+    setSkillsState(newSkills);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you can send skills data to an API or handle it as needed
-    console.log("Submitted skills:", skills);
-    // Navigate to the next page or show a success message
-    router.push("/Routes/gptVetting/CandidateInterview/Test"); // Assuming '/test' is the next page
+    // Dispatch skills data to Redux store
+    dispatch(setSkills(skills));
+    // Navigate to the next page
+    router.push("/Routes/gptVetting/CandidateInterview/Test");
   };
 
   return (

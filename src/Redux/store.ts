@@ -17,6 +17,8 @@ import modalReducer from "./Features/GptVettilngSlice/modalSlice";
 import candidateFormReducer from "./Features/GptVettilngSlice/candidateFormSlice";
 import microphoneReducer from "./Features/GptVettilngSlice/microphoneSlice";
 import cameraReducer from "./Features/GptVettilngSlice/cameraSlice";
+import testReducer from "./Features/GptVettilngSlice/testSlice";
+import examReducer from "./Features/GptVettilngSlice/examSlice";
 
 export const store = configureStore({
   reducer: {
@@ -37,6 +39,8 @@ export const store = configureStore({
     candidateForm: candidateFormReducer,
     microphone: microphoneReducer,
     camera: cameraReducer,
+    test: testReducer,
+    exam: examReducer,
   },
 });
 
