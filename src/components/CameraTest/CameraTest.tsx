@@ -1,40 +1,53 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState, AppDispatch } from "@/Redux/store";
-import {
-  startTesting,
-  finishTesting,
-} from "@/Redux/Features/GptVettilngSlice/cameraSlice";
-import { checkCamera } from "@/app/utils/mediaUtils";
+import React, { useState, useRef } from "react";
 
-const CameraTest = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const status = useSelector((state: RootState) => state.camera.status);
-  const [isTesting, setIsTesting] = useState(false);
+// Define the props interface
+interface VideoTestProps {
+  onCameraTestComplete: (isWorking: boolean) => void;
+}
 
-  const handleStart = async () => {
-    dispatch(startTesting());
-    setIsTesting(true);
-    await checkCamera();
-    dispatch(finishTesting());
-    setIsTesting(false);
+const VideoTest: React.FC<VideoTestProps> = ({ onCameraTestComplete }) => {
+  const [isCameraOn, setIsCameraOn] = useState<boolean>(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  const handleStartCamera = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
+      setIsCameraOn(true);
+      onCameraTestComplete(true);
+    } catch (err) {
+      console.error("Error accessing webcam", err);
+      onCameraTestComplete(false);
+    }
   };
 
-  useEffect(() => {
-    if (status === "finished") {
-      alert("Camera test completed!");
+  const handleStopCamera = () => {
+    const stream = videoRef.current?.srcObject as MediaStream;
+    const tracks = stream?.getTracks();
+    tracks?.forEach((track) => track.stop());
+    if (videoRef.current) {
+      videoRef.current.srcObject = null;
     }
-  }, [status]);
+    setIsCameraOn(false);
+  };
 
   return (
-    <div>
-      <h2>Camera Test</h2>
-      <button onClick={handleStart} disabled={isTesting}>
-        {isTesting ? "Testing..." : "Start Test"}
+    <div className="video-test-container">
+      <h2>Test your camera</h2>
+      <video
+        ref={videoRef}
+        autoPlay
+        playsInline
+        style={{ width: "100%", maxHeight: "400px", marginBottom: "20px" }}
+      ></video>
+      <button onClick={isCameraOn ? handleStopCamera : handleStartCamera}>
+        {isCameraOn ? "Stop Camera" : "Start Camera"}
       </button>
     </div>
   );
 };
 
-export default CameraTest;
+export default VideoTest;

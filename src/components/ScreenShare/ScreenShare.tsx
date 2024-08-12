@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-const ScreenShare = () => {
+const ScreenShare: React.FC = () => {
   const startScreenShare = async () => {
     try {
       const stream = await navigator.mediaDevices.getDisplayMedia({

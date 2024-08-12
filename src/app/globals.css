@@ -54,6 +54,87 @@ body {
 .custom-radio:checked {
   border-color: var(--Gradient-1, #01d18f);
 }
+.mic-test-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f9f9f9;
+}
+
+.mic-test-container h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.mic-level-display {
+  width: 100%;
+  max-width: 300px;
+  height: 25px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.mic-level-bar {
+  height: 100%;
+  background-color: #007bff;
+  transition: width 0.1s ease-in-out;
+}
+
+.mic-test-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.mic-test-container button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.video-test-container,
+.screen-share-test-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f9f9f9;
+}
+
+.video-test-container h2,
+.screen-share-test-container h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.video-test-container button,
+.screen-share-test-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.video-test-container button:disabled,
+.screen-share-test-container button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
 
 /* GptVetting Invitation Modal Radio Button */
 /* Global Common Rester */
