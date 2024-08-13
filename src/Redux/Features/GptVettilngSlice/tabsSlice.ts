@@ -1,6 +1,9 @@
 // Redux/Features/GptVettilngSlice/tabsSlice.ts
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TabsState } from "./Types/Types";
+import { createSlice } from "@reduxjs/toolkit";
+
+interface TabsState {
+  activeTab: string;
+}
 
 const initialState: TabsState = {
   activeTab: "Report",
@@ -10,7 +13,7 @@ const tabsSlice = createSlice({
   name: "tabs",
   initialState,
   reducers: {
-    setActiveTab(state, action: PayloadAction<string>) {
+    setActiveTab: (state, action) => {
       state.activeTab = action.payload;
     },
   },
