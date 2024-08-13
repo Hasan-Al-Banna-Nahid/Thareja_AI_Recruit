@@ -26,7 +26,7 @@ const page: React.FC = () => (
         We appreciate your time and will get back to you after you’ve completed
         the assessment.
       </p>
-      <Link href="/Routes/gptVetting/CandidateInterview/skills">
+      <Link href="/Routes/gptVetting/CandidateInterview/InterViewIFrame">
         <button className="btn my-2 mb-4 bg-blue-200  hover:btn-primary rounded-[100px] border-2 border-blue-500 shadow-2xl">
           Start now
         </button>

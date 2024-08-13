@@ -134,7 +134,7 @@ const ExamPage: React.FC = () => {
                 }`}
               >
                 <span className="text-white animate-ping absolute inline-flex h-5 w-5 rounded-full bg-blue-700 opacity-75"></span>
-                <span className=" text-slate-900">Recording...</span>
+                <span className=" text-white">Recording...</span>
               </div>
             ) : (
               <div className={`flex flex-col items-center`}>
