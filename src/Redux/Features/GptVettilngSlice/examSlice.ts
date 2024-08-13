@@ -1,4 +1,3 @@
-// examSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface ExamState {
@@ -24,25 +23,37 @@ const examSlice = createSlice({
   initialState,
   reducers: {
     startRecording: (state, action: PayloadAction<MediaRecorder>) => {
+      if (state.mediaRecorder) {
+        state.mediaRecorder.stop();
+      }
       state.mediaRecorder = action.payload;
       state.recording = true;
+      state.chunks = []; // Clear previous chunks
+
       state.mediaRecorder.start();
       state.mediaRecorder.ondataavailable = (e) => {
-        state.chunks.push(e.data);
+        if (e.data.size > 0) {
+          state.chunks.push(e.data);
+        }
       };
     },
     pauseRecording: (state) => {
-      state.mediaRecorder?.pause();
-      state.recording = false;
+      if (state.mediaRecorder) {
+        state.mediaRecorder.pause();
+        state.recording = false;
+      }
     },
     stopRecording: (state) => {
-      state.mediaRecorder?.stop();
-      state.recording = false;
+      if (state.mediaRecorder) {
+        state.mediaRecorder.stop();
+        state.recording = false;
+      }
     },
     saveRecording: (state) => {
       const blob = new Blob(state.chunks, { type: "video/webm" });
       state.chunks = [];
       // Implement saving the blob to server or local storage
+      console.log("Recording saved:", blob);
     },
     nextQuestion: (state) => {
       state.currentQuestionIndex += 1;
