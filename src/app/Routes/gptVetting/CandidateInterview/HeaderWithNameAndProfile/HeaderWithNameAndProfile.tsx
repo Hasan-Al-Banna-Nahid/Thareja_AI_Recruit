@@ -4,7 +4,7 @@ import profile from "@/../public/img/freelancer-profile.png";
 const HeaderWithNameAndProfile: React.FC = () => {
   return (
     <div>
-      <div className="flex justify-between items-center p-4 my-6">
+      <div className="flex justify-between items-center">
         <div>
           <h2 className="link link-primary text-[22px] no-underline">
             Recruit
