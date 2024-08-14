@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import MoreButtonSVG from "@/app/../../public/svgs/more.svg";
-import "../Styles.css";
+import "./Styles.css";
 interface Skill {
   name: string;
   experience: string;

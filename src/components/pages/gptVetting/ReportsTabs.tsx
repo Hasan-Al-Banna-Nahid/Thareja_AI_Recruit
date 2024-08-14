@@ -50,7 +50,7 @@ const ReportsTabs: React.FC = () => {
 
   return (
     <React.Fragment>
-      <div className="flex gap-4 items-center my-4">
+      <div className="flex gap-4 items-center my-4 ">
         <hr />
         <Link
           href="#report"

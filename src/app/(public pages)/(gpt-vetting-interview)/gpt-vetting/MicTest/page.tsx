@@ -98,13 +98,13 @@ const MicTestModal: React.FC = () => {
   }, [videoStream, screenStream]);
 
   const handleFinishTests = () => {
-    toast.success("All tests completed successfully! Close The Modal");
+    // toast.success("All tests completed successfully! Close The ");
     setTimeout(() => {
       // onClose();
       setTimeout(() => {
-        router.push("/Routes/gptVetting/CandidateInterview/Exam");
-      }, 1000);
-    }, 1000);
+        router.push("/gpt-vetting/Exam");
+      }, 500);
+    }, 500);
   };
 
   return (

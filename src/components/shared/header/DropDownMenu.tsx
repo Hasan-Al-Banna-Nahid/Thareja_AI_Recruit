@@ -45,7 +45,7 @@ const DropDownMenu = () => {
       ))}
 
       <Link href="/message">Message</Link>
-      <Link href="/Routes/gptVetting">gpt Vetting</Link>
+      <Link href="/gpt-vetting">gpt Vetting</Link>
     </div>
   );
 };

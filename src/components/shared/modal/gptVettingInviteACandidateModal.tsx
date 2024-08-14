@@ -55,7 +55,7 @@ const GptVettingInviteACandidateModal: React.FC = () => {
       bodyClassName: "toast-body",
       icon: <Image src={tick} alt="tick" className="text-[27px]" />,
     });
-    router.push("/Routes/gptVetting/CandidateInterview/Email");
+    router.push("/gpt-vetting/Email");
   };
 
   const handleSkillChange = (
@@ -94,7 +94,7 @@ const GptVettingInviteACandidateModal: React.FC = () => {
 
   return (
     <Container>
-      <div className="fixed inset-0 flex items-center justify-center  bg-black bg-opacity-50  overflow-x-auto p-12">
+      <div className="fixed rounded-lg inset-0 flex items-center justify-center  bg-opacity-50  p-12 bg-[#17171791] overflow-x-hidden z-[99999999999999999]">
         <div className="bg-white rounded-lg w-full max-w-lg mx-auto p-8">
           <div className="flex justify-between items-center mb-4 rounded-lg bg-[rgba(0,90,255,0.03)] shadow-md p-2">
             <h2 className="text-lg font-semibold overflow-scroll">

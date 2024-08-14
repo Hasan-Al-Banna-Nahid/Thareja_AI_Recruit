@@ -3,14 +3,15 @@
 import React from "react";
 import JobCard from "@/components/pages/allJobPost/JobCard";
 import Container from "@/components/shared/wrapper/Container";
-import BodyTopRightCornerButtons from "@/app/Routes/gptVetting/MainLayout/BodyTopRightCornerButtons";
-import ReportTabs from "@/app/Routes/gptVetting/MainLayout/ReportsTabs";
-import Table from "@/app/Routes/gptVetting/MainLayout/Table";
-import Footer from "@/app/Routes/gptVetting/MainLayout/Footer";
-import "../Styles.css";
+
+import "./Styles.css";
 import MainHeader from "@/components/shared/header/MainHeader";
 import InviteACandidateModal from "@/components/shared/modal/gptVettingInviteACandidateModal";
 import { ToastContainer } from "react-toastify";
+import BodyTopRightCornerButtons from "./BodyTopRightCornerButtons";
+import ReportsTabs from "./ReportsTabs";
+import Table from "./Table";
+import Footer from "./Footer";
 
 const MainContent: React.FC = () => {
   return (
@@ -23,7 +24,7 @@ const MainContent: React.FC = () => {
             <div>gpt-vetting</div>
             <BodyTopRightCornerButtons />
           </div>
-          <ReportTabs />
+          <ReportsTabs />
           <Table />
           <Footer />
         </JobCard>

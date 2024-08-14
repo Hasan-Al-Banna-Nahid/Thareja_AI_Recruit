@@ -15,7 +15,7 @@ const gptVettingInviteACandidateButton: React.FC<ButtonProps> = ({
   onClick,
 }) => (
   <button
-    className={`${buttonClassName} mx-2 gap-2 flex flex-row-reverse justify-between items-center`}
+    className={`${buttonClassName} mx-2 gap-2 flex flex-row-reverse justify-between items-center bg-[#17171791] overflow-x-hidden z-[99999999999999999]`}
     onClick={onClick}
   >
     <Image src={svgSrc} alt={text} />

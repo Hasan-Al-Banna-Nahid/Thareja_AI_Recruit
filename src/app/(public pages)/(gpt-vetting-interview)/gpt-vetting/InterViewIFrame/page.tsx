@@ -1,12 +1,11 @@
 import React from "react";
-import HeaderWithNameAndProfile from "../HeaderWithNameAndProfile/HeaderWithNameAndProfile";
+
 import { FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
 
 const InterViewIFrame = () => {
   return (
     <div>
-      <HeaderWithNameAndProfile />
       <div className="mt-6 mx-auto w-[1200px]">
         <p className="text-center wrap p-6">
           The difficulty of the questions are based on how you rate yourself on
@@ -31,17 +30,13 @@ const InterViewIFrame = () => {
         ></iframe>
       </div>
       <div className="w-[200px] mx-auto my-2">
-        <Link href={"/Routes/gptVetting/CandidateInterview/skills"}>
+        <Link href={"/gpt-vetting/skills"}>
           <button className="btn btn-primary rounded-[80px] mx-auto text-center flex justify-center items-center gap-2">
             <span>Continue</span>
             <FaArrowRight />
           </button>
         </Link>
       </div>
-      <p className="text-center my-2">
-        Powered by{" "}
-        <span className="link link-primary no-underline">Recruit</span>
-      </p>
     </div>
   );
 };

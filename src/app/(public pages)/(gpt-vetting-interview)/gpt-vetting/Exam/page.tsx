@@ -12,8 +12,10 @@ import {
 import recordIcon from "@/../public/svgs/recordIcon.svg";
 import { FaRegStopCircle } from "react-icons/fa";
 import Image from "next/image";
-import HeaderWithNameAndProfile from "../HeaderWithNameAndProfile/HeaderWithNameAndProfile";
 
+export const MetaData = {
+  title: "Exam",
+};
 const ExamPage: React.FC = () => {
   const dispatch = useDispatch();
   const [isRecording, setIsRecording] = useState(false);
@@ -106,7 +108,6 @@ const ExamPage: React.FC = () => {
 
   return (
     <div>
-      <HeaderWithNameAndProfile />
       <div className="exam-page flex flex-col items-center py-6">
         <h2 className="text-center text-xl font-bold mb-2">
           Question {currentQuestionIndex + 1}/10
@@ -146,7 +147,9 @@ const ExamPage: React.FC = () => {
 
           {isUploadingMessageShown ? (
             <div className="uploading-placeholder text-center text-lg font-semibold mb-4 flex justify-center items-center flex-col">
-              <span className={`loading loading-dots  w-[50px] text-blue-500 mx-auto`}></span>
+              <span
+                className={`loading loading-dots  w-[50px] text-blue-500 mx-auto`}
+              ></span>
               <span> Upload complete. Moving to the next question...</span>{" "}
             </div>
           ) : isUploading ? (
@@ -177,10 +180,6 @@ const ExamPage: React.FC = () => {
 
         <div className="note text-center text-gray-500 mt-4">
           <p>Note: please do not refresh the page or you’ll lose the data.</p>
-          <p className="text-xl mt-2  ">
-            Powered by{" "}
-            <span className="link-primary no-underline link">Recruit</span>
-          </p>
         </div>
       </div>
     </div>

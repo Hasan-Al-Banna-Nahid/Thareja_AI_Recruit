@@ -1,9 +1,8 @@
 import SkillsForm from "@/components/SkillsForm/SkillsForm";
-import HeaderWithNameAndProfile from "../HeaderWithNameAndProfile/HeaderWithNameAndProfile";
+import HeaderWithNameAndProfile from "../../../../../components/pages/gptVetting/HeaderWithNameAndProfile/HeaderWithNameAndProfile";
 
 const SkillsPage = () => (
   <div>
-    <HeaderWithNameAndProfile />
     <SkillsForm />
   </div>
 );
