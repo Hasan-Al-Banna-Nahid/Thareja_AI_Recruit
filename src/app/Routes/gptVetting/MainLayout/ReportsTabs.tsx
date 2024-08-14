@@ -6,7 +6,6 @@ import { setActiveTab } from "@/Redux/Features/GptVettilngSlice/tabsSlice";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { IoCloudDownloadSharp } from "react-icons/io5";
-import Modal from "./Modal"; // Import the Modal component
 import ReportDownloadModal from "./ReportDownload";
 
 const ReportsTabs: React.FC = () => {

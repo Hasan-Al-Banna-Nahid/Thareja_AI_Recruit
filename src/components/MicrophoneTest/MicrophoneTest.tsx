@@ -25,7 +25,7 @@ const MicrophoneTest: React.FC<{
   const startMic = async () => {
     try {
       audioContextRef.current = new (window.AudioContext ||
-        window.webkitAudioContext)();
+        window.AudioContext)();
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       microphoneRef.current =
         audioContextRef.current.createMediaStreamSource(stream);

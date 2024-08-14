@@ -1,8 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import arrowRight from "@/app/../../public/svgs/vuesax/linear/arrow-right.svg";
-import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { setSkills } from "@/Redux/Features/GptVettilngSlice/examSlice"; // Import the action
 import MicTestModal from "../shared/modal/MicTestModal";
@@ -33,16 +31,13 @@ const SkillsForm: React.FC = () => {
 
   const handleOpenModal = (e: React.FormEvent) => {
     e.preventDefault();
-    // Open the modal instead of navigating away
-    setModalOpen(true);
+    setModalOpen(true); // Open the modal
   };
 
   const handleModalSubmit = () => {
-    // Dispatch skills data to Redux store
-    dispatch(setSkills(skills));
-    // Close modal and navigate to the next page
-    setModalOpen(false);
-    router.push("/Routes/gptVetting/CandidateInterview/Test");
+    dispatch(setSkills(skills)); // Dispatch skills data to Redux store
+    setModalOpen(false); // Close modal
+    router.push("/Routes/gptVetting/CandidateInterview/Test"); // Navigate to next page
   };
 
   return (
@@ -51,8 +46,7 @@ const SkillsForm: React.FC = () => {
         <h2 className="text-center text-[30px] my-6">Add your Top Skills</h2>
         <p className="text-center my-6">
           Add your top skills and make sure to accurately rate yourself on each
-          skill. Choose specific skills (e.g., React, Node.js, QuickBooks,
-          Project Management, etc.)
+          skill.
         </p>
       </div>
       <form onSubmit={handleOpenModal}>
@@ -107,18 +101,14 @@ const SkillsForm: React.FC = () => {
           </button>
           <p className="text-center my-6">
             Please note that this test is timed, with an approximate collection
-            of 2 minutes per question and the timer will start as soon as you
-            see the question.
+            of 2 minutes per question.
           </p>
-          {/* */}
           <div className="flex justify-center items-center">
             <Link
               href={"/Routes/gptVetting/CandidateInterview/MicTest"}
               className="flex justify-center items-center gap-2 rounded-[100px] border-[1px] bg-[#005AFF] py-[16px] px-[20px] text-center text-white"
             >
-              <button type="submit" className="">
-                Start Test
-              </button>
+              <button type="submit">Start Test</button>
               <FaArrowRight />
             </Link>
           </div>

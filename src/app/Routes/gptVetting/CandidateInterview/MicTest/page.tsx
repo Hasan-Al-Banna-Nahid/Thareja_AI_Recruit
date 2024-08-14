@@ -5,11 +5,11 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { IoIosClose } from "react-icons/io";
 
-interface MicVideoScreenModalProps {
-  onClose: () => void;
-}
+// interface MicTestModalProps {
+//   onClose: () => void;
+// }
 
-const MicTestModal: React.FC<MicVideoScreenModalProps> = ({ onClose }) => {
+const MicTestModal: React.FC = () => {
   const [micTested, setMicTested] = useState(false);
   const [videoTested, setVideoTested] = useState(false);
   const [screenShared, setScreenShared] = useState(false);
@@ -98,13 +98,13 @@ const MicTestModal: React.FC<MicVideoScreenModalProps> = ({ onClose }) => {
   }, [videoStream, screenStream]);
 
   const handleFinishTests = () => {
-    toast.success("All tests completed successfully!");
+    toast.success("All tests completed successfully! Close The Modal");
     setTimeout(() => {
       // onClose();
       setTimeout(() => {
         router.push("/Routes/gptVetting/CandidateInterview/Exam");
-      }, 100);
-    }, 2500);
+      }, 1000);
+    }, 1000);
   };
 
   return (
@@ -121,7 +121,6 @@ const MicTestModal: React.FC<MicVideoScreenModalProps> = ({ onClose }) => {
                   <p>Test your Microphone</p>
                   <IoIosClose className="text-2xl" />
                 </button>
-                {/* <p className="my-4">Speak and pause do you hear a reply?</p> */}
               </div>
               <p className="text-center mt-2">
                 We will protect your allowed data, and it is required to
@@ -254,11 +253,11 @@ const MicTestModal: React.FC<MicVideoScreenModalProps> = ({ onClose }) => {
           )}
         </div>
 
-        <div className="flex justify-between mt-6">
+        {/* <div className="flex justify-between mt-6">
           <button className="bg-gray-300 py-2 px-4 rounded" onClick={onClose}>
             Close
-          </button>
-        </div>
+          </button> */}
+        {/* </div> */}
       </div>
       <ToastContainer />
     </div>

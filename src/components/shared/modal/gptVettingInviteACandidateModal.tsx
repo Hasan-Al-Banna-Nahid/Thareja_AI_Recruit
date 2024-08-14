@@ -18,6 +18,10 @@ import { BsTrash3 } from "react-icons/bs";
 import ReviewJobCategory from "@/components/pages/jobPostReview/ReviewJobCategory";
 import Container from "../wrapper/Container";
 import { useRouter } from "next/navigation";
+import {
+  Candidate,
+  Skill,
+} from "@/Redux/Features/GptVettilngSlice/Types/Types";
 
 const GptVettingInviteACandidateModal: React.FC = () => {
   const dispatch = useDispatch();

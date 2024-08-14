@@ -24,10 +24,10 @@ const InterViewIFrame = () => {
           className="mx-auto rounded-lg"
           src="https://www.youtube.com/embed/TlB_eWDSMt4?si=F31NA6Xd8TQiK06j"
           title="YouTube video player"
-          frameborder="0"
+          // frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen
+          // referrerpolicy="strict-origin-when-cross-origin"
+          // allowfullscreen
         ></iframe>
       </div>
       <div className="w-[200px] mx-auto my-2">
