@@ -6,6 +6,8 @@ import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { setSkills } from "@/Redux/Features/GptVettilngSlice/examSlice"; // Import the action
 import MicTestModal from "../shared/modal/MicTestModal";
+import Link from "next/link";
+import { FaArrowRight } from "react-icons/fa6";
 
 const SkillsForm: React.FC = () => {
   const [skills, setSkillsState] = useState<
@@ -108,14 +110,17 @@ const SkillsForm: React.FC = () => {
             of 2 minutes per question and the timer will start as soon as you
             see the question.
           </p>
+          {/* */}
           <div className="flex justify-center items-center">
-            <button
-              type="submit"
-              className="rounded-[100px] border-[1px] bg-[#005AFF] py-[16px] px-[20px] text-center text-white"
+            <Link
+              href={"/Routes/gptVetting/CandidateInterview/MicTest"}
+              className="flex justify-center items-center gap-2 rounded-[100px] border-[1px] bg-[#005AFF] py-[16px] px-[20px] text-center text-white"
             >
-              Start Test
-            </button>
-            <Image src={arrowRight} alt="arrow" width={10} height={10} />
+              <button type="submit" className="">
+                Start Test
+              </button>
+              <FaArrowRight />
+            </Link>
           </div>
           <p className="text-center text-[20px]">
             Note: please do not refresh the page or you’ll lose the data.

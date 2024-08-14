@@ -146,7 +146,7 @@ const ExamPage: React.FC = () => {
 
           {isUploadingMessageShown ? (
             <div className="uploading-placeholder text-center text-lg font-semibold mb-4 flex justify-center items-center flex-col">
-              <span className="loading loading-dots  w-[50px] text-blue-500 mx-auto"></span>
+              <span className={`loading loading-dots  w-[50px] text-blue-500 mx-auto`}></span>
               <span> Upload complete. Moving to the next question...</span>{" "}
             </div>
           ) : isUploading ? (

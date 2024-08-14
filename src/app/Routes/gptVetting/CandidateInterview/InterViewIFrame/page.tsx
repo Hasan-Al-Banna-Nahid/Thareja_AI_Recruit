@@ -31,7 +31,7 @@ const InterViewIFrame = () => {
         ></iframe>
       </div>
       <div className="w-[200px] mx-auto my-2">
-        <Link href={"/Routes/gptVetting/CandidateInterview/MicTest"}>
+        <Link href={"/Routes/gptVetting/CandidateInterview/skills"}>
           <button className="btn btn-primary rounded-[80px] mx-auto text-center flex justify-center items-center gap-2">
             <span>Continue</span>
             <FaArrowRight />
