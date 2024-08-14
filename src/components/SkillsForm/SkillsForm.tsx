@@ -37,7 +37,7 @@ const SkillsForm: React.FC = () => {
   const handleModalSubmit = () => {
     dispatch(setSkills(skills)); // Dispatch skills data to Redux store
     setModalOpen(false); // Close modal
-    router.push("/gpt-vetting/Test"); // Navigate to next page
+    router.push("/gpt-vetting/test"); // Navigate to next page
   };
 
   return (
@@ -105,7 +105,7 @@ const SkillsForm: React.FC = () => {
           </p>
           <div className="flex justify-center items-center">
             <Link
-              href={"/gpt-vetting/MicTest"}
+              href={"/gpt-vetting/mic-test"}
               className="flex justify-center items-center gap-2 rounded-[100px] border-[1px] bg-[#005AFF] py-[16px] px-[20px] text-center text-white"
             >
               <button type="submit">Start Test</button>

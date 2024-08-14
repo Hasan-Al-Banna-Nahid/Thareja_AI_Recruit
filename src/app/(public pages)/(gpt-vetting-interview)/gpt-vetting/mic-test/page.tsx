@@ -102,7 +102,7 @@ const MicTestModal: React.FC = () => {
     setTimeout(() => {
       // onClose();
       setTimeout(() => {
-        router.push("/gpt-vetting/Exam");
+        router.push("/gpt-vetting/exam");
       }, 500);
     }, 500);
   };
@@ -149,26 +149,26 @@ const MicTestModal: React.FC = () => {
                 </>
               )}
 
-              {!micTested ||
-                (micTested && (
-                  <div className="flex justify-center gap-4 mt-4 items-center">
-                    <button
-                      className="link link-primary no-underline py-2 px-4 rounded"
-                      onClick={handleMicTest}
-                    >
-                      Speak
-                    </button>
-                    <button
-                      className={`${
-                        !micTested && "bg-slate-400"
-                      } bg-blue-500 text-white py-2 px-4 rounded-[50px]`}
-                      onClick={() => setCurrentStep("video")}
-                      disabled={!micTested}
-                    >
-                      Yes
-                    </button>
-                  </div>
-                ))}
+              {micTested && (
+                <div className="flex justify-center gap-4 mt-4 items-center">
+                  <button
+                    className="link link-primary no-underline py-2 px-4 rounded"
+                    onClick={handleMicTest}
+                    disabled={micTested}
+                  >
+                    Speak
+                  </button>
+                  <button
+                    className={`${
+                      !micTested && "bg-slate-400"
+                    } bg-blue-500 text-white py-2 px-4 rounded-[50px]`}
+                    onClick={() => setCurrentStep("video")}
+                    disabled={!micTested}
+                  >
+                    Yes
+                  </button>
+                </div>
+              )}
             </>
           )}
 

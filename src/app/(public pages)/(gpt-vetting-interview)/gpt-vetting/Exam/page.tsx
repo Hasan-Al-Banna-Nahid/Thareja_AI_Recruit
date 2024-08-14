@@ -113,46 +113,54 @@ const ExamPage: React.FC = () => {
           Can you explain the concept of {currentQuestion} in Node.js?
         </p>
 
-        <div
-          className={`recording-container flex flex-col items-center justify-center p-6 mb-6  border-2
-            
-           bg-[#EDF4FF] w-[1200px] h-[240px] rounded-2xl`}
-        >
+        <div className="recording-container flex flex-col items-center justify-center p-6 mb-6 border-2 bg-[#EDF4FF] w-[1200px] h-[240px] rounded-2xl">
           <button
             onClick={startRecordingHandler}
             className={`start-recording-button w-24 h-24 rounded-full bg-blue-600 flex items-center justify-center text-blue-500 ${
               isRecording ? "bg-blue-600" : "hover:bg-blue-400"
-            } ${isUploadingMessageShown || (isUploading && "hidden")}`}
+            } ${isUploadingMessageShown || isUploading ? "hidden" : ""}`}
             disabled={isRecording}
           >
             {isRecording ? (
               <div
                 className={`recording-animation flex items-center justify-center ${
-                  isUploadingMessageShown || (isUploading && "hidden")
+                  isUploadingMessageShown || isUploading ? "hidden" : ""
                 }`}
               >
                 <span className="text-white animate-ping absolute inline-flex h-5 w-5 rounded-full bg-blue-700 opacity-75"></span>
-                <span className=" text-white">Recording...</span>
+                <span className="text-white">Recording...</span>
               </div>
             ) : (
-              <div className={`flex flex-col items-center`}>
-                <i className="fas fa-microphone text-2xl"></i>
-                <Image src={recordIcon} alt="record" />{" "}
+              <div
+                className={`flex flex-col items-center ${
+                  isUploadingMessageShown || isUploading ? "hidden" : ""
+                }`}
+              >
+                <i
+                  className={`fas fa-microphone text-2xl ${
+                    isUploadingMessageShown || isUploading ? "hidden" : ""
+                  }`}
+                ></i>
+                <Image
+                  className={`${
+                    isUploadingMessageShown || isUploading ? "hidden" : ""
+                  }`}
+                  src={recordIcon}
+                  alt="record"
+                />
               </div>
             )}
           </button>
 
           {isUploadingMessageShown ? (
             <div className="uploading-placeholder text-center text-lg font-semibold mb-4 flex justify-center items-center flex-col">
-              <span
-                className={`loading loading-dots  w-[50px] text-blue-500 mx-auto`}
-              ></span>
-              <span> Upload complete. Moving to the next question...</span>{" "}
+              <span className="loading loading-dots w-[50px] text-blue-500 mx-auto"></span>
+              <span> Upload complete. Moving to the next question...</span>
             </div>
           ) : isUploading ? (
             <div className="uploading-placeholder text-center text-lg font-semibold mb-4 flex justify-center items-center flex-col">
-              <span className="loading loading-dots w-[50px]  text-blue-500 mx-auto"></span>
-              <span> Uploading your answer...</span>{" "}
+              <span className="loading loading-dots w-[50px] text-blue-500 mx-auto"></span>
+              <span> Uploading your answer...</span>
             </div>
           ) : null}
         </div>
@@ -165,10 +173,10 @@ const ExamPage: React.FC = () => {
           Stop Recording
         </button>
 
-        <div className="flex justify-between items-center gap-6 ">
+        <div className="flex justify-between items-center gap-6">
           <button
             onClick={handleSave}
-            className="btn  rounded-[50px] text-white bg-blue-600"
+            className="btn rounded-[50px] text-white bg-blue-600"
             disabled={isRecording || !chunksRef.current.length}
           >
             Save & Continue <FaRegStopCircle />

@@ -55,7 +55,7 @@ const GptVettingInviteACandidateModal: React.FC = () => {
       bodyClassName: "toast-body",
       icon: <Image src={tick} alt="tick" className="text-[27px]" />,
     });
-    router.push("/gpt-vetting/Email");
+    router.push("/gpt-vetting/email");
   };
 
   const handleSkillChange = (
