@@ -13,9 +13,6 @@ import recordIcon from "@/../public/svgs/recordIcon.svg";
 import { FaRegStopCircle } from "react-icons/fa";
 import Image from "next/image";
 
-export const MetaData = {
-  title: "Exam",
-};
 const ExamPage: React.FC = () => {
   const dispatch = useDispatch();
   const [isRecording, setIsRecording] = useState(false);
