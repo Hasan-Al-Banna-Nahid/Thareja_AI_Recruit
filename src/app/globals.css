@@ -12,10 +12,11 @@ body {
   box-sizing: border-box;
 }
 /* styles.css */
-/* GptVetting Invitation Modal Radio Button */
 
 /* styles.css */
 /* styles.css */
+
+/* GptVetting Invitation  */
 .custom-radio {
   -webkit-appearance: none;
   appearance: none;
@@ -54,8 +55,13 @@ body {
 .custom-radio:checked {
   border-color: var(--Gradient-1, #01d18f);
 }
+.blur-opacity-background {
+  filter: blur(8px);
+  opacity: 0.5; /* Adjust this value for desired opacity */
+  transition: all 0.3s ease;
+}
 
-/* GptVetting Invitation Modal Radio Button */
+/* GptVetting  */
 /* Global Common Rester */
 /* scrollbar style starts */
 /* Chrome, Safari */

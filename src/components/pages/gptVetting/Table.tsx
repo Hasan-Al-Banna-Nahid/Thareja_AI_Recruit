@@ -25,11 +25,19 @@ const TableRow: React.FC<TableRowProps> = ({
   skills,
 }) => (
   <tr className="TableRow">
-    <td>{name}</td>
-    <td>{title}</td>
-    <td>{location}</td>
-    <td>{testOn}</td>
-    <td>
+    <td data-label="Name" className="">
+      {name}
+    </td>
+    <td data-label="Title" className="">
+      {title}
+    </td>
+    <td data-label="Location" className="">
+      {location}
+    </td>
+    <td data-label="Test On" className="">
+      {testOn}
+    </td>
+    <td data-label="Main Tech Stacks" className="">
       {skills.map((skill, index) => (
         <p key={index}>
           {skill.name}{" "}
@@ -37,7 +45,7 @@ const TableRow: React.FC<TableRowProps> = ({
         </p>
       ))}
     </td>
-    <td>
+    <td data-label="Options">
       <Image
         src={MoreButtonSVG}
         alt="More options"
@@ -123,8 +131,8 @@ const Table: React.FC = () => {
     <React.Fragment>
       <div className="overflow-x-auto w-full TableLayout">
         <table className="table TableStyle w-full">
-          <thead className="TableHead w-full h-[60px] rounded-md text-center">
-            <tr>
+          <thead className="TableHead w-full h-[60px] rounded-md text-center bg-blue-400">
+            <tr className=" bg-blue-400">
               <th className="text-[#30353E]">Name</th>
               <th className="text-[#30353E]">Title</th>
               <th className="text-[#30353E]">Location</th>

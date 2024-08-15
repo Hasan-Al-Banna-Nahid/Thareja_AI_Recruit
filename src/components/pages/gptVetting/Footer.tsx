@@ -14,17 +14,13 @@ const Footer: React.FC = () => {
   const totalPage = 10; // Example total page count, adjust as needed
 
   return (
-    <React.Fragment>
-      <div className=" flex justify-center items-center gap-6">
-        <div>
-          <JobsPagination
-            currentPage={currentPage}
-            totalPage={totalPage}
-            setCurrentPage={setCurrentPage}
-          />
-        </div>
-      </div>
-    </React.Fragment>
+    <div className="flex justify-center lg:gap-12 items-center py-4">
+      <JobsPagination
+        currentPage={currentPage}
+        totalPage={totalPage}
+        setCurrentPage={setCurrentPage}
+      />
+    </div>
   );
 };
 

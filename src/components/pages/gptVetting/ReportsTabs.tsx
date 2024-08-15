@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
@@ -50,8 +52,7 @@ const ReportsTabs: React.FC = () => {
 
   return (
     <React.Fragment>
-      <div className="flex gap-4 items-center my-4 ">
-        <hr />
+      <div className="flex flex-wrap gap-4 items-center my-4">
         <Link
           href="#report"
           onClick={() => handleTabClick("Report")}
@@ -67,7 +68,7 @@ const ReportsTabs: React.FC = () => {
           onClick={() => handleTabClick("Connected")}
           className={`${
             activeTab === "Connected" &&
-            "text-[#005AFF] border-b-2 border-[#005AFF] hover:cursor-pointer"
+            "text-[#005AFF] border-b-2 border-[#005AFF]"
           }`}
         >
           Connected(3)
@@ -77,19 +78,19 @@ const ReportsTabs: React.FC = () => {
           onClick={() => handleTabClick("Archived")}
           className={`${
             activeTab === "Archived" &&
-            "text-[#005AFF] border-b-2 border-[#005AFF] hover:cursor-pointer"
+            "text-[#005AFF] border-b-2 border-[#005AFF]"
           }`}
         >
           Archived(0)
         </Link>
       </div>
-      <hr />
+      <hr className="flex-grow" />
 
       {activeTab === "Connected" && (
         <div>
-          <div className="flex justify-end my-4">
+          <div className="flex flex-wrap justify-end my-4 gap-2">
             <button
-              className="link link-primary no-underline mr-2 flex items-center gap-2"
+              className="link link-primary no-underline flex items-center gap-2"
               onClick={openModal}
             >
               <IoCloudDownloadSharp />
@@ -102,91 +103,8 @@ const ReportsTabs: React.FC = () => {
               Archive
             </button>
           </div>
-          <div id="reportContent" style={{ padding: "20px", display: "none" }}>
-            <div
-              style={{ borderBottom: "1px solid #ccc", marginBottom: "10px" }}
-            >
-              <h1 style={{ color: "#005AFF" }}>Report</h1>
-              <p>
-                <strong>Report id:</strong> 004559
-              </p>
-              <p>
-                <strong>Date:</strong> 02 Aug, 2023
-              </p>
-              <p>
-                <strong>Name:</strong> Ali
-              </p>
-              <p>
-                <strong>Email:</strong> thareja@recruit.ai
-              </p>
-            </div>
-
-            <div style={{ marginBottom: "10px" }}>
-              <h2 style={{ color: "#005AFF" }}>Node.Js</h2>
-              <p>
-                <strong>Self rating:</strong> Intermediate
-              </p>
-              <p>
-                <strong>AI assessment:</strong>
-              </p>
-              <p>Lorem ipsum dolor sit amet...</p>
-              <p style={{ color: "red" }}>
-                <strong>Rating by AI:</strong> Not experienced
-              </p>
-            </div>
-
-            <div style={{ marginBottom: "10px" }}>
-              <h2 style={{ color: "#005AFF" }}>React.Js</h2>
-              <p>
-                <strong>Self rating:</strong> Beginner
-              </p>
-              <p>
-                <strong>AI assessment:</strong>
-              </p>
-              <p>Lorem ipsum dolor sit amet...</p>
-              <p style={{ color: "orange" }}>
-                <strong>Rating by AI:</strong> Junior
-              </p>
-            </div>
-
-            <div style={{ marginBottom: "10px" }}>
-              <h2 style={{ color: "#005AFF" }}>Python</h2>
-              <p>
-                <strong>Self rating:</strong> Expert
-              </p>
-              <p>
-                <strong>AI assessment:</strong>
-              </p>
-              <p>Lorem ipsum dolor sit amet...</p>
-              <p style={{ color: "green" }}>
-                <strong>Rating by AI:</strong> Expert
-              </p>
-            </div>
-
-            <div style={{ marginBottom: "10px" }}>
-              <h2 style={{ color: "#005AFF" }}>Product Management</h2>
-              <p>
-                <strong>Self rating:</strong> Beginner
-              </p>
-              <p>
-                <strong>AI assessment:</strong>
-              </p>
-              <p>Lorem ipsum dolor sit amet...</p>
-              <p style={{ color: "orange" }}>
-                <strong>Rating by AI:</strong> Junior
-              </p>
-            </div>
-
-            <div style={{ borderTop: "1px solid #ccc", marginTop: "10px" }}>
-              <h2 style={{ color: "#005AFF" }}>Soft Skills Result</h2>
-              <div style={{ marginBottom: "10px" }}>
-                <h3>Communication</h3>
-                <p>Lorem ipsum dolor sit amet...</p>
-                <p style={{ color: "orange" }}>
-                  <strong>Rating by AI:</strong> Below average
-                </p>
-              </div>
-            </div>
+          <div id="reportContent" className="hidden">
+            {/* Report content for download */}
           </div>
         </div>
       )}
@@ -196,89 +114,12 @@ const ReportsTabs: React.FC = () => {
         onClose={closeModal}
         onDownload={handleDownloadReport}
       >
-        <div id="reportPreview" style={{ padding: "20px" }}>
+        <div id="reportPreview" className="p-4">
           {/* Reuse the report content here for preview */}
-          <div style={{ borderBottom: "1px solid #ccc", marginBottom: "10px" }}>
-            <h1 style={{ color: "#005AFF" }}>Report</h1>
-            <p>
-              <strong>Report id:</strong> 004559
-            </p>
-            <p>
-              <strong>Date:</strong> 02 Aug, 2023
-            </p>
-            <p>
-              <strong>Name:</strong> Ali
-            </p>
-            <p>
-              <strong>Email:</strong> thareja@recruit.ai
-            </p>
-          </div>
-
-          <div style={{ marginBottom: "10px" }}>
-            <h2 style={{ color: "#005AFF" }}>Node.Js</h2>
-            <p>
-              <strong>Self rating:</strong> Intermediate
-            </p>
-            <p>
-              <strong>AI assessment:</strong>
-            </p>
-            <p>Lorem ipsum dolor sit amet...</p>
-            <p style={{ color: "red" }}>
-              <strong>Rating by AI:</strong> Not experienced
-            </p>
-          </div>
-
-          <div style={{ marginBottom: "10px" }}>
-            <h2 style={{ color: "#005AFF" }}>React.Js</h2>
-            <p>
-              <strong>Self rating:</strong> Beginner
-            </p>
-            <p>
-              <strong>AI assessment:</strong>
-            </p>
-            <p>Lorem ipsum dolor sit amet...</p>
-            <p style={{ color: "orange" }}>
-              <strong>Rating by AI:</strong> Junior
-            </p>
-          </div>
-
-          <div style={{ marginBottom: "10px" }}>
-            <h2 style={{ color: "#005AFF" }}>Python</h2>
-            <p>
-              <strong>Self rating:</strong> Expert
-            </p>
-            <p>
-              <strong>AI assessment:</strong>
-            </p>
-            <p>Lorem ipsum dolor sit amet...</p>
-            <p style={{ color: "green" }}>
-              <strong>Rating by AI:</strong> Expert
-            </p>
-          </div>
-
-          <div style={{ marginBottom: "10px" }}>
-            <h2 style={{ color: "#005AFF" }}>Product Management</h2>
-            <p>
-              <strong>Self rating:</strong> Beginner
-            </p>
-            <p>
-              <strong>AI assessment:</strong>
-            </p>
-            <p>Lorem ipsum dolor sit amet...</p>
-            <p style={{ color: "orange" }}>
-              <strong>Rating by AI:</strong> Junior
-            </p>
-          </div>
-
-          <div style={{ borderTop: "1px solid #ccc", marginTop: "10px" }}>
-            <h2 style={{ color: "#005AFF" }}>Soft Skills Result</h2>
-            <div style={{ marginBottom: "10px" }}>
-              <h3>Communication</h3>
-              <p>Lorem ipsum dolor sit amet...</p>
-              <p style={{ color: "orange" }}>
-                <strong>Rating by AI:</strong> Below average
-              </p>
-            </div>
+          {/* Example content */}
+          <div className="border-b border-gray-300 mb-4">
+            <h3 className="text-lg font-semibold">Report Title</h3>
+            <p>Report details...</p>
           </div>
         </div>
       </ReportDownloadModal>

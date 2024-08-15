@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/Redux/store";
 import { closeModal } from "@/Redux/Features/GptVettilngSlice/modalSlice";
@@ -39,10 +39,24 @@ const GptVettingInviteACandidateModal: React.FC = () => {
     "existing"
   );
 
-  if (!isOpen) return null;
+  const [isBlurred, setIsBlurred] = useState(false);
+
+  useEffect(() => {
+    const mainContent = document.querySelector("main"); // Assuming your main content is wrapped in a <main> tag
+    if (isBlurred) {
+      mainContent?.classList.add("blur-opacity-background");
+    } else {
+      mainContent?.classList.remove("blur-opacity-background");
+    }
+
+    return () => {
+      mainContent?.classList.remove("blur-opacity-background");
+    };
+  }, [isBlurred]);
 
   const handleSendInvitation = () => {
     dispatch(closeModal());
+    setIsBlurred(true);
     toast.success("Candidate invited successfully!", {
       position: "top-center",
       autoClose: 3000,
@@ -54,6 +68,7 @@ const GptVettingInviteACandidateModal: React.FC = () => {
       className: "toast-center",
       bodyClassName: "toast-body",
       icon: <Image src={tick} alt="tick" className="text-[27px]" />,
+      onClose: () => setIsBlurred(false),
     });
     router.push("/gpt-vetting/email");
   };
@@ -92,10 +107,12 @@ const GptVettingInviteACandidateModal: React.FC = () => {
     }
   };
 
+  if (!isOpen) return null;
+
   return (
     <Container>
-      <div className="fixed rounded-lg inset-0 flex items-center justify-center  bg-opacity-50  p-12 bg-[#17171791] overflow-x-hidden z-[99999999999999999]">
-        <div className="bg-white rounded-lg w-full max-w-lg mx-auto p-8">
+      <div className="fixed rounded-2xl inset-0 flex items-center justify-center p-12 bg-[#17171768] overflow-x-hidden z-[99999999999999999] ">
+        <div className="bg-white w-full max-w-lg mx-auto p-8 rounded-2xl">
           <div className="flex justify-between items-center mb-4 rounded-lg bg-[rgba(0,90,255,0.03)] shadow-md p-2">
             <h2 className="text-lg font-semibold overflow-scroll">
               Invite a candidate

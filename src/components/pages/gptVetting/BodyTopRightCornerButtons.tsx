@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { useDispatch } from "react-redux";
 import InfoCircleSVG from "@/app/../../public/svgs/info-circle.svg";
@@ -15,7 +17,7 @@ const BodyTopRightCornerButtons: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex flex-wrap gap-4 items-center">
       <Button svgSrc={InfoCircleSVG} text="Customize Content" />
       <button className="commonButton mx-2">Manage Access</button>
       <Button svgSrc={VideoSquareSVG} text="Quick Demo" />

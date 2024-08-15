@@ -9,9 +9,9 @@ import {
   nextQuestion,
   setTimeLeft,
 } from "@/Redux/Features/GptVettilngSlice/examSlice";
-import recordIcon from "@/../public/svgs/recordIcon.svg";
-import { FaRegStopCircle } from "react-icons/fa";
-import Image from "next/image";
+import { FaMicrophone } from "react-icons/fa";
+import { CiClock1 } from "react-icons/ci";
+import { FaRegCircleStop } from "react-icons/fa6";
 
 const ExamPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -38,47 +38,54 @@ const ExamPage: React.FC = () => {
     }
   }, [timeLeft, dispatch]);
 
-  const startRecordingHandler = async () => {
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      try {
-        const audioStream = await navigator.mediaDevices.getUserMedia({
-          audio: true,
-          video: false,
-        });
+  useEffect(() => {
+    // Set the total time to 20 minutes (1200 seconds) when the component mounts
+    dispatch(setTimeLeft(1200));
+  }, [dispatch]);
 
-        const screenStream = await navigator.mediaDevices.getDisplayMedia({
-          video: true,
-        });
-
-        // Combine screen and audio streams
-        const combinedStream = new MediaStream([
-          ...audioStream.getTracks(),
-          ...screenStream.getTracks(),
-        ]);
-
-        const mediaRecorder = new MediaRecorder(combinedStream);
-        mediaRecorder.ondataavailable = (e) => {
-          chunksRef.current.push(e.data);
-        };
-        mediaRecorderRef.current = mediaRecorder;
-        screenStreamRef.current = screenStream;
-        mediaRecorder.start();
-        setIsRecording(true);
-        dispatch(startRecording(mediaRecorder));
-      } catch (err) {
-        console.error("Error accessing media devices.", err);
+  const toggleRecordingHandler = async () => {
+    if (isRecording) {
+      // Stop recording
+      if (mediaRecorderRef.current) {
+        mediaRecorderRef.current.stop();
+        setIsRecording(false);
       }
-    }
-  };
 
-  const stopRecordingHandler = () => {
-    if (mediaRecorderRef.current) {
-      mediaRecorderRef.current.stop();
-      setIsRecording(false);
-    }
+      if (screenStreamRef.current) {
+        screenStreamRef.current.getTracks().forEach((track) => track.stop());
+      }
+    } else {
+      // Start recording
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        try {
+          const audioStream = await navigator.mediaDevices.getUserMedia({
+            audio: true,
+            video: false,
+          });
 
-    if (screenStreamRef.current) {
-      screenStreamRef.current.getTracks().forEach((track) => track.stop());
+          const screenStream = await navigator.mediaDevices.getDisplayMedia({
+            video: true,
+          });
+
+          // Combine screen and audio streams
+          const combinedStream = new MediaStream([
+            ...audioStream.getTracks(),
+            ...screenStream.getTracks(),
+          ]);
+
+          const mediaRecorder = new MediaRecorder(combinedStream);
+          mediaRecorder.ondataavailable = (e) => {
+            chunksRef.current.push(e.data);
+          };
+          mediaRecorderRef.current = mediaRecorder;
+          screenStreamRef.current = screenStream;
+          mediaRecorder.start();
+          setIsRecording(true);
+          dispatch(startRecording(mediaRecorder));
+        } catch (err) {
+          console.error("Error accessing media devices.", err);
+        }
+      }
     }
   };
 
@@ -100,12 +107,26 @@ const ExamPage: React.FC = () => {
   };
 
   const handleSaveAndContinue = async () => {
-    dispatch(nextQuestion());
+    if (currentQuestionIndex < skills.length - 1) {
+      dispatch(nextQuestion());
+    }
+  };
+
+  const formatTime = (seconds: number) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
   };
 
   return (
     <div>
-      <div className="exam-page flex flex-col items-center py-6">
+      <div className="exam-page flex flex-col items-center py-6 relative">
+        <div className="absolute top-4 right-4 text-xl font-semibold rounded-[100px] bg-[#EDF4FF] p-2 flex justify-center items-center gap-2 text-blue-500">
+          <span>
+            <CiClock1 />
+          </span>{" "}
+          <span>{formatTime(timeLeft)}</span>
+        </div>
         <h2 className="text-center text-xl font-bold mb-2">
           Question {currentQuestionIndex + 1}/10
         </h2>
@@ -114,44 +135,6 @@ const ExamPage: React.FC = () => {
         </p>
 
         <div className="recording-container flex flex-col items-center justify-center p-6 mb-6 border-2 bg-[#EDF4FF] w-[1200px] h-[240px] rounded-2xl">
-          <button
-            onClick={startRecordingHandler}
-            className={`start-recording-button w-24 h-24 rounded-full bg-blue-600 flex items-center justify-center text-blue-500 ${
-              isRecording ? "bg-blue-600" : "hover:bg-blue-400"
-            } ${isUploadingMessageShown || isUploading ? "hidden" : ""}`}
-            disabled={isRecording}
-          >
-            {isRecording ? (
-              <div
-                className={`recording-animation flex items-center justify-center ${
-                  isUploadingMessageShown || isUploading ? "hidden" : ""
-                }`}
-              >
-                <span className="text-white animate-ping absolute inline-flex h-5 w-5 rounded-full bg-blue-700 opacity-75"></span>
-                <span className="text-white">Recording...</span>
-              </div>
-            ) : (
-              <div
-                className={`flex flex-col items-center ${
-                  isUploadingMessageShown || isUploading ? "hidden" : ""
-                }`}
-              >
-                <i
-                  className={`fas fa-microphone text-2xl ${
-                    isUploadingMessageShown || isUploading ? "hidden" : ""
-                  }`}
-                ></i>
-                <Image
-                  className={`${
-                    isUploadingMessageShown || isUploading ? "hidden" : ""
-                  }`}
-                  src={recordIcon}
-                  alt="record"
-                />
-              </div>
-            )}
-          </button>
-
           {isUploadingMessageShown ? (
             <div className="uploading-placeholder text-center text-lg font-semibold mb-4 flex justify-center items-center flex-col">
               <span className="loading loading-dots w-[50px] text-blue-500 mx-auto"></span>
@@ -162,24 +145,41 @@ const ExamPage: React.FC = () => {
               <span className="loading loading-dots w-[50px] text-blue-500 mx-auto"></span>
               <span> Uploading your answer...</span>
             </div>
-          ) : null}
-        </div>
+          ) : (
+            <>
+              <button
+                onClick={toggleRecordingHandler}
+                className={`start-recording-button w-24 h-24 rounded-full bg-blue-600 flex items-center justify-center text-blue-500 relative ${
+                  isRecording ? "animate-wave" : ""
+                }`}
+              >
+                <FaMicrophone className="text-white text-4xl" />
 
-        <button
-          onClick={stopRecordingHandler}
-          className="btn btn-primary mb-4"
-          disabled={!isRecording}
-        >
-          Stop Recording
-        </button>
+                {isRecording && (
+                  <div className="absolute w-full h-full rounded-full animate-wave">
+                    <span className="absolute inset-0 w-full h-full rounded-full border-4 border-blue-300 animate-ping"></span>
+                  </div>
+                )}
+              </button>
+
+              <div className="mt-4 text-center text-lg font-semibold">
+                {isRecording ? (
+                  <span>Recording...</span>
+                ) : (
+                  <span>Click to start recording</span>
+                )}
+              </div>
+            </>
+          )}
+        </div>
 
         <div className="flex justify-between items-center gap-6">
           <button
             onClick={handleSave}
-            className="btn rounded-[50px] text-white bg-blue-600"
+            className=" flex justify-center items-center gap-2 btn rounded-[50px] text-white bg-blue-600"
             disabled={isRecording || !chunksRef.current.length}
           >
-            Save & Continue <FaRegStopCircle />
+            <span>Save & Continue</span> <FaRegCircleStop />
           </button>
         </div>
 

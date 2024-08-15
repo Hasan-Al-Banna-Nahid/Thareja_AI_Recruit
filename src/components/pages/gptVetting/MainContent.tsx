@@ -17,11 +17,11 @@ const MainContent: React.FC = () => {
   return (
     <React.Fragment>
       <MainHeader />
-      <Container className="mx-auto">
+      <Container className="mx-auto px-4 sm:px-6 lg:px-8">
         <ToastContainer />
-        <JobCard className="mt-24">
-          <div className="flex justify-between items-center">
-            <div>gpt-vetting</div>
+        <JobCard className="mt-6 sm:mt-12 lg:mt-24">
+          <div className="flex flex-col sm:flex-row justify-between items-center">
+            <div className="text-lg font-semibold">gpt-vetting</div>
             <BodyTopRightCornerButtons />
           </div>
           <ReportsTabs />
