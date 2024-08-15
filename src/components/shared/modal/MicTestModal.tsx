@@ -7,9 +7,13 @@ import { IoIosClose } from "react-icons/io";
 
 interface MicVideoScreenModalProps {
   onClose: () => void;
+  onSubmit?: () => void; // Optional if it's not always needed
 }
 
-const MicTestModal: React.FC<MicVideoScreenModalProps> = ({ onClose }) => {
+const MicTestModal: React.FC<MicVideoScreenModalProps> = ({
+  onClose,
+  onSubmit,
+}) => {
   const [micTested, setMicTested] = useState(false);
   const [videoTested, setVideoTested] = useState(false);
   const [screenShared, setScreenShared] = useState(false);
@@ -32,7 +36,7 @@ const MicTestModal: React.FC<MicVideoScreenModalProps> = ({ onClose }) => {
       const microphone = audioContext.createMediaStreamSource(stream);
       const analyser = audioContext.createAnalyser();
       microphone.connect(analyser);
-      analyser.fftSize = 64; // Reduced fftSize for better visualization
+      analyser.fftSize = 64;
       const bufferLength = analyser.frequencyBinCount;
       const dataArray = new Uint8Array(bufferLength);
 
@@ -121,7 +125,6 @@ const MicTestModal: React.FC<MicVideoScreenModalProps> = ({ onClose }) => {
                   <p>Test your Microphone</p>
                   <IoIosClose className="text-2xl" />
                 </button>
-                {/* <p className="my-4">Speak and pause do you hear a reply?</p> */}
               </div>
               <p className="text-center mt-2">
                 We will protect your allowed data, and it is required to
@@ -146,10 +149,8 @@ const MicTestModal: React.FC<MicVideoScreenModalProps> = ({ onClose }) => {
                       ))}
                     </div>
                   </div>
-                  <div className="flex justify-between gap-4"></div>
                 </>
               )}
-
               {!micTested ||
                 (micTested && (
                   <div className="flex justify-center gap-4 mt-4 items-center">
